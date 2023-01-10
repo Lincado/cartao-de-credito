@@ -36,5 +36,8 @@
   "window.zoomLevel": 0,
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
-  }
+  },
+  "cSpell.words": [
+    "mastercard"
+  ]
 }
