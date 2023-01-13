@@ -97,14 +97,50 @@ const addButton = document.querySelector("#add-card")
 addButton.addEventListener("click", () => {
     alert("Cartão adicionado")
 })
-
+//impede o evento submit de dar reload na página
 document.querySelector("form").addEventListener("submit", (event) => {
     event.preventDefault()
 })
 
+//pegando value do input nome do titula e adicionando esse value ma div cc-holder
 const cardHolder = document.querySelector("#card-holder")
 cardHolder.addEventListener("input", () => {
     const ccHolder = document.querySelector(".cc-holder .value")
     ccHolder.innerText = cardHolder.value.length === 0 ? "FULANO DA SILVA" : cardHolder.value
-
 })
+
+//evento vai ser capturado quando for aceito
+securityCodeMasked.on("accept", () => {
+    updateSecurityCode(securityCodeMasked.value)
+})
+
+function updateSecurityCode(code) {
+    const ccSecurity = document.querySelector(".cc-security .value")
+    ccSecurity.innerText = code.length === 0 ? "123" : code
+}
+//se evento do número foi aceito, é adicionado ao cartão
+cardNumberMasked.on("accept", () => {
+    //dentro do cardNumberMasked busca as mask e a mask que encaixou com padrão digitado (ativa pelo expressão lógica/regex) e pega cardType
+    const cardType = cardNumberMasked.masked.currentMask.cardType
+    //adiciona bandeira, cor e numero do cartão
+    setCardType(cardType)
+    updateNumberCard(cardNumberMasked.value)  
+})
+
+//função com if ternário para verificar se número  está padrão ou se foi preenchido para ser adicionado
+function updateNumberCard (number) {
+    const ccNumber = document.querySelector(".cc-number")
+    ccNumber.innerText = number.length === 0 ? "1234 5678 9012 3456" : number
+
+}
+
+// se evento for aceito adiciona data de expiração
+expirationDateMasked.on("accept", () => {
+    updateExpirationDate(expirationDateMasked.value)
+})
+
+//função com if ternário para verificar se data está padrão ou se foi preenchida para ser adicionada
+function updateExpirationDate(date) {
+    const ccExpiration = document.querySelector(".cc-expiration .value")
+    ccExpiration.innerText = date.length === 0 ? "02/32" : date
+}
