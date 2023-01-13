@@ -15,11 +15,11 @@ form label {
   font-size: 1.2rem;
   line-height: 1.5rem;
   letter-spacing: 0.01px;
-  text-transform: uppercase;
   color: #e1e1e6;
 }
 
 form input {
+  text-transform: uppercase;
   background: #121214;
   border: 1px solid #323238;
   border-radius: 6px;
